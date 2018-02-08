@@ -10,19 +10,25 @@
  */
 #include <vector>
 #include <stdexcept>
+#include <iostream>
 
 int solve(const std::vector<int>& vec)
 {
   int best = 0;
-  for(size_t i = 0 ; i < vec.size() ; ++i )
+  for(size_t i = 0 ; i < vec.size() ; ++i)
   {
-    for(size_t sub = 0 ; sub < vec.size() ; ++sub)
-    {
-      if(i == sub or sub == (i+1) or sub == (i-1))
-        continue;
-
-      auto sum = vec[i] + vec[sub];
+    auto checkBest = [&](int&& sum) {
       best = sum > best ? sum : best;
+    };
+
+    // Lower part
+    for(int lSub = 0 ; lSub < (int)i-1 ; ++lSub) {
+      checkBest(vec[i] + vec[lSub]);
+    }
+
+    // Higher part
+    for(size_t hSub = i+2 ; hSub < vec.size() ; ++hSub) {
+      checkBest(vec[i] + vec[hSub]);
     }
   }
   return best;
