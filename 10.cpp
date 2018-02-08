@@ -1,8 +1,8 @@
 /**
  * @file 10.cpp
  * This problem was asked by Apple.
- * 
- * Implement a job scheduler which takes in a 
+ *
+ * Implement a job scheduler which takes in a
  * function f and an integer n, and calls f after n milliseconds.
  */
 #include <thread>
@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     auto func = [](){
       printf("Func has been called");
     };
-    
+
     delayedLaunch(func, atoi(argv[1]));
   }catch(...) {
     return 1;
