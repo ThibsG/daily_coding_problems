@@ -8,7 +8,7 @@ enable_testing()
 # Flags
 set(CMAKE_BUILD_TYPE "RELEASE")
 
-## C++17 flag
+## C++14 flag
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 ## Optimizations
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -Werror")
