@@ -32,19 +32,45 @@ int solveNaive(const std::vector<int>& input)
   return sum;
 }
 
+/**
+ * Optimized O(n) solution
+ */
+int solve(const std::vector<int>& input)
+{
+  int currentMaxSum = 0;
+  int globalMaxSum = 0;
+
+  for(std::size_t i = 0 ; i < input.size() ; ++i)
+  {
+    currentMaxSum = currentMaxSum + input.at(i);
+    if(currentMaxSum < 0)
+      currentMaxSum = 0;
+
+    if(currentMaxSum > globalMaxSum)
+      globalMaxSum = currentMaxSum;
+  }
+
+  return globalMaxSum;
+}
+
 
 int main(int argc, char** argv)
 {
   auto test = [](std::vector<int>&& vec, int expected) {
     auto result = solveNaive(vec);
+    if(result != expected)
+      throw std::runtime_error("Problem using the naive solver !");
 
+    result = solve(vec);
     if(result != expected)
       throw std::runtime_error("Problem using the solver !");
   };
 
+  test({-1, 4, 2, -1}, 6);
   test({34, -50, 42, 14, -5, 86}, 137);
   test({-5, -1, -8, -9}, 0);
   test({-5, 6, 7, 1, 4, -8, 16}, 26);
+  test({-2, -3, 4, -1, -2, 1, 5, -3}, 7);
 
   return 0;
 };
